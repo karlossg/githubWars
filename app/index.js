@@ -1,6 +1,6 @@
-let Ract = require('react');
-let ReactDOM = require('react-dom');
-require('./index/css ');
+const Ract = require('react');
+const ReactDOM = require('react-dom');
+require('./index.css');
 
 class App extends React.Component {
   render() {
