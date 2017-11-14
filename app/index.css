@@ -26,21 +26,26 @@ a {
     display: block;
     padding: 7px 0;
     margin: 10px auto;
-  }
+}
   
-  .button:hover:enabled {
+.button:hover:enabled {
     background: linear-gradient(#1a1a1a,#0a0a0a);
     color: #fff;
     text-decoration: none;
-  }
+}
   
-  .button:active {
+.button:active {
     transform: translateY(1px);
-  }
+}
 
 .conatiner {
     max-width: 1200px;
     margin: 0 auto; 
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
 }
 
 .languages {
