@@ -1,11 +1,16 @@
 const React = require('react');
+const Link = require('react-router-dom').Link;
 
 class Home extends React.Component {
-  render() { <
-    div className = 'home-container' >
-      <
-      h1 > Github Battle: Fight with your github friends! < /h1> <
-      /div>
+  render() {
+    return (
+      <div className='home-container'>
+        <h1>Github Battle: Fight with your github friends!</h1>
+        <Link className='button' to='/battle'>
+          Battle! 
+        </Link>
+      </div>
+    )
   }
 }
 
