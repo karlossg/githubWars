@@ -10,21 +10,31 @@ class PlayerInput extends React.Component {
     };
   
   this.handleChange = this.handleChange.bind(this);  
+  this.handleSubmit = this.handleSubmit.bind(this);  
   }
 
   handleChange(event) {
-    let value = event.target.value;
+    var value = event.target.value;
 
     this.setState(function () {
       return {
         username: value
       }
-    })
+    });
   }
   
+  handleSubmit(event) {
+    event.preventDefault();
+
+    this.props.onSubmit(
+      this.props.id,
+      this.props.username
+    )
+  }
+
   render() {
     return (
-      <form className='column'>
+      <form className='column' onSubmit={this.handleSubmit}>
         <label className='header' htmlFor='username'>
           {this.props.label}
         </label>
@@ -59,9 +69,9 @@ class Battle extends React.Component {
     this.state = {
       playerOneName: '',
       playerTwoName: '',
-      playerOneImage: '',
-      playerTwoImage: ''
-    }
+      playerOneImage: null,
+      playerTwoImage: null,
+    };
   
   this.handleSubmit = this.handleSubmit.bind(this);
   }
