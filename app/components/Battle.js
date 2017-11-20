@@ -1,5 +1,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const Link = require('react-router-dom').Link;
 
 function PlayerPreview (props) {
   return (
@@ -10,14 +11,21 @@ function PlayerPreview (props) {
           src={props.avatar}   
           alt={'Avatar for ' + props.username} 
         />
+        <h2 className='username'>@{props.username}</h2>
       </div>
+      <button 
+        className='reset'
+        onClick={props.onReset.bind(null, props.id)}>
+          Reset
+      </button>
     </div>
   )
 }
 
 PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequire,
-  username: PropTypes.string.isRequire,
+  avatar: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
   onReset: PropTypes.func.isRequired
 }
 
@@ -94,6 +102,7 @@ class Battle extends React.Component {
     };
   
   this.handleSubmit = this.handleSubmit.bind(this);
+  this.handleReset = this.handleReset.bind(this);
   }
   
   handleSubmit(id, username) {
@@ -105,9 +114,21 @@ class Battle extends React.Component {
     })
   }
 
+  handleReset(id) {
+    this.setState(function () {
+      let newState = {};
+      newState[id + 'Name'] = '';
+      newState[id + 'Image'] = null;
+      return newState;
+    })
+  }
+
   render() {
     let playerOneName = this.state.playerOneName;
     let playerTwoName = this.state.playerTwoName;
+    let playerOneImage = this.state.playerOneImage;
+    let playerTwoImage = this.state.playerTwoImage;
+
     return (
       <div>
         <div className='row'>
@@ -117,10 +138,34 @@ class Battle extends React.Component {
               label='Player One'
               onSubmit={this.handleSubmit}/>}
           
+          {playerOneImage !== null &&
+            <PlayerPreview
+              avatar={playerOneImage}
+              username={playerOneName}
+              onReset={this.handleReset} 
+              id='playerOne'
+            />}
+
           {!playerTwoName && 
             <PlayerInput id='playerTwo'
             label='Player Two'
             onSubmit={this.handleSubmit}/>}
+
+          {playerTwoImage !== null &&
+            <PlayerPreview
+              avatar={playerTwoImage}
+              username={playerTwoName}
+              onReset={this.handleReset} 
+              id='playerTwo'
+            />}
+          
+          {playerOneImage && playerTwoImage &&
+            <Link 
+              className='button'
+              to={}>
+                Battle
+              </Link>}
+
         </div>
       </div> 
     )
