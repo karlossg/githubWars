@@ -124,6 +124,7 @@ class Battle extends React.Component {
   }
 
   render() {
+    let match = this.props.match;
     let playerOneName = this.state.playerOneName;
     let playerTwoName = this.state.playerTwoName;
     let playerOneImage = this.state.playerOneImage;
@@ -136,7 +137,8 @@ class Battle extends React.Component {
             <PlayerInput 
               id='playerOne'
               label='Player One'
-              onSubmit={this.handleSubmit}/>}
+              onSubmit={this.handleSubmit}
+            />}
           
           {playerOneImage !== null &&
             <PlayerPreview
@@ -147,9 +149,10 @@ class Battle extends React.Component {
             />}
 
           {!playerTwoName && 
-            <PlayerInput id='playerTwo'
-            label='Player Two'
-            onSubmit={this.handleSubmit}/>}
+            <PlayerInput 
+              id='playerTwo'
+              label='Player Two'
+              onSubmit={this.handleSubmit}/>}
 
           {playerTwoImage !== null &&
             <PlayerPreview
@@ -158,17 +161,18 @@ class Battle extends React.Component {
               onReset={this.handleReset} 
               id='playerTwo'
             />}
-          
+            </div> 
           {playerOneImage && playerTwoImage &&
             <Link 
-              // className='button'
-              // to={}
-              >
+              className='button'
+              to={{
+                pathname: match.url + '/results',
+                search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
+              }}>
                 Battle
               </Link>}
-
         </div>
-      </div> 
+      
     )
   }
 }
